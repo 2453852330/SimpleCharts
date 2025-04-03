@@ -85,7 +85,7 @@ int32 SPieChart::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeomet
 			// FVector2f pos_center_line_start = FVector2f(FMath::Cos(radial_center),FMath::Sin(radial_center)) * ( it.Radius+ PieChartSettings.LineLength);
 			// 检测文本绘制在左侧还是右侧
 			FVector2f text_offset;
-			text_offset.X = ( FMath::Cos(centerAngle) > 0 ? 1 : -1 ) * PieChartSettings.TextOffset + pos_center_line_end.X;
+			text_offset.X = ( FMath::Cos(radial_center) > 0 ? 1 : -1 ) * PieChartSettings.TextOffset + pos_center_line_end.X;
 			text_offset.Y = pos_center_line_end.Y;
 			// 画线
 			TArray<FVector2f> Points;
