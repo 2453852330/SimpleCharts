@@ -39,7 +39,9 @@ public class SimpleCharts : ModuleRules
 				"Slate",
 				"SlateCore",
 				// ... add private dependencies that you statically link with here ...	
-				"UMG"
+				"UMG",
+				"Json",
+				"JsonUtilities"
 			}
 			);
 		

@@ -1,0 +1,145 @@
+{
+	"lineDatas": [
+		{
+			"lineColor":
+			{
+				"r": 1,
+				"g": 0.13290999829769135,
+				"b": 0.36471199989318848,
+				"a": 1
+			},
+			"lineTitle": "A",
+			"titleOffset":
+			{
+				"x": 0,
+				"y": 0
+			},
+			"lineWidth": 1,
+			"pathList": [
+				{
+					"x": 0,
+					"y": 0
+				},
+				{
+					"x": 10,
+					"y": 10
+				},
+				{
+					"x": 20,
+					"y": 15
+				},
+				{
+					"x": 30,
+					"y": 8
+				},
+				{
+					"x": 40,
+					"y": 20
+				},
+				{
+					"x": 50,
+					"y": 3
+				}
+			]
+		},
+		{
+			"lineColor":
+			{
+				"r": 0.18396900594234467,
+				"g": 0.80909901857376099,
+				"b": 1,
+				"a": 1
+			},
+			"lineTitle": "B",
+			"titleOffset":
+			{
+				"x": 0,
+				"y": 0
+			},
+			"lineWidth": 1,
+			"pathList": [
+				{
+					"x": 0,
+					"y": 0
+				},
+				{
+					"x": 4.5495770000000002,
+					"y": 15
+				},
+				{
+					"x": 30,
+					"y": 24
+				},
+				{
+					"x": 50,
+					"y": 12
+				}
+			]
+		}
+	],
+	"xAxisTitle": "X",
+	"yAxisTitle": "Y",
+	"xAxisTitleOffset":
+	{
+		"x": 0,
+		"y": 0
+	},
+	"yAxisTitleOffset":
+	{
+		"x": 0,
+		"y": 0
+	},
+	"xAxisColor":
+	{
+		"r": 1,
+		"g": 1,
+		"b": 1,
+		"a": 1
+	},
+	"yAxisColor":
+	{
+		"r": 1,
+		"g": 1,
+		"b": 1,
+		"a": 1
+	},
+	"axisLineThickness": 1,
+	"lineThickness": 1,
+	"font":
+	{
+		"fontObject": "/Script/Engine.Font'/Engine/EngineFonts/Roboto.Roboto'",
+		"fontMaterial": "None",
+		"outlineSettings":
+		{
+			"outlineSize": 0,
+			"bMiteredCorners": false,
+			"bSeparateFillAlpha": false,
+			"bApplyOutlineToDropShadows": false,
+			"outlineMaterial": "None",
+			"outlineColor":
+			{
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 1
+			}
+		},
+		"typefaceFontName": "Regular",
+		"size": 24,
+		"letterSpacing": 0,
+		"skewAmount": 0,
+		"bForceMonospaced": false,
+		"monospacedWidth": 1
+	},
+	"axisOffset":
+	{
+		"x": 50,
+		"y": 50
+	},
+	"axisScale": 0.69999998807907104,
+	"titleOffset":
+	{
+		"x": 0.921458,
+		"y": 0.92145699999999997
+	}
+}
