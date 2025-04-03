@@ -1,0 +1,139 @@
+{
+	"barChartDatas": [
+		{
+			"value": 12,
+			"color":
+			{
+				"r": 1,
+				"g": 0.16145800054073334,
+				"b": 0.16145800054073334,
+				"a": 1
+			},
+			"title": "A"
+		},
+		{
+			"value": 5,
+			"color":
+			{
+				"r": 1,
+				"g": 0.77552700042724609,
+				"b": 0,
+				"a": 1
+			},
+			"title": "B"
+		},
+		{
+			"value": 8,
+			"color":
+			{
+				"r": 0,
+				"g": 0.034290000796318054,
+				"b": 1,
+				"a": 1
+			},
+			"title": "C"
+		}
+	],
+	"orientation": "EHorizontal",
+	"barChartBrush":
+	{
+		"bIsDynamicallyLoaded": false,
+		"drawAs": "Image",
+		"tiling": "NoTile",
+		"mirroring": "NoMirror",
+		"imageType": "NoImage",
+		"imageSize":
+		{
+			"x": 32,
+			"y": 32
+		},
+		"margin":
+		{
+			"left": 0,
+			"top": 0,
+			"right": 0,
+			"bottom": 0
+		},
+		"tintColor":
+		{
+			"specifiedColor":
+			{
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 1
+			},
+			"colorUseRule": "UseColor_Specified"
+		},
+		"outlineSettings":
+		{
+			"cornerRadii":
+			{
+				"x": 0,
+				"y": 0,
+				"z": 0,
+				"w": 0
+			},
+			"color":
+			{
+				"specifiedColor":
+				{
+					"r": 0,
+					"g": 0,
+					"b": 0,
+					"a": 0
+				},
+				"colorUseRule": "UseColor_Specified"
+			},
+			"width": 0,
+			"roundingType": "HalfHeightRadius",
+			"bUseBrushTransparency": false
+		},
+		"resourceObject": "None",
+		"resourceName": "None",
+		"uVRegion":
+		{
+			"min":
+			{
+				"x": 0,
+				"y": 0
+			},
+			"max":
+			{
+				"x": 0,
+				"y": 0
+			},
+			"bIsValid": false
+		}
+	},
+	"font":
+	{
+		"fontObject": "/Script/Engine.Font'/Engine/EngineFonts/Roboto.Roboto'",
+		"fontMaterial": "None",
+		"outlineSettings":
+		{
+			"outlineSize": 0,
+			"bMiteredCorners": false,
+			"bSeparateFillAlpha": false,
+			"bApplyOutlineToDropShadows": false,
+			"outlineMaterial": "None",
+			"outlineColor":
+			{
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 1
+			}
+		},
+		"typefaceFontName": "Regular",
+		"size": 24,
+		"letterSpacing": 0,
+		"skewAmount": 0,
+		"bForceMonospaced": false,
+		"monospacedWidth": 1
+	},
+	"width": 0.61119997501373291,
+	"span": 38.091468811035156,
+	"lengthScale": 0.79133898019790649,
+	"titleOffset": 16.303945541381836
+}

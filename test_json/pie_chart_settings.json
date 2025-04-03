@@ -1,0 +1,146 @@
+{
+	"pieChartDatas": [
+		{
+			"value": 2,
+			"radius": 130.46797180175781,
+			"title": "A",
+			"color":
+			{
+				"r": 1,
+				"g": 0.10726100206375122,
+				"b": 0.39099100232124329,
+				"a": 1
+			}
+		},
+		{
+			"value": 2,
+			"radius": 174.32379150390625,
+			"title": "B",
+			"color":
+			{
+				"r": 0.61982697248458862,
+				"g": 1,
+				"b": 0.94004499912261963,
+				"a": 1
+			}
+		},
+		{
+			"value": 2,
+			"radius": 145.95587158203125,
+			"title": "C",
+			"color":
+			{
+				"r": 1,
+				"g": 0.088541999459266663,
+				"b": 0.088541999459266663,
+				"a": 1
+			}
+		}
+	],
+	"brush":
+	{
+		"bIsDynamicallyLoaded": false,
+		"drawAs": "Image",
+		"tiling": "NoTile",
+		"mirroring": "NoMirror",
+		"imageType": "NoImage",
+		"imageSize":
+		{
+			"x": 32,
+			"y": 32
+		},
+		"margin":
+		{
+			"left": 0,
+			"top": 0,
+			"right": 0,
+			"bottom": 0
+		},
+		"tintColor":
+		{
+			"specifiedColor":
+			{
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 1
+			},
+			"colorUseRule": "UseColor_Specified"
+		},
+		"outlineSettings":
+		{
+			"cornerRadii":
+			{
+				"x": 0,
+				"y": 0,
+				"z": 0,
+				"w": 0
+			},
+			"color":
+			{
+				"specifiedColor":
+				{
+					"r": 0,
+					"g": 0,
+					"b": 0,
+					"a": 0
+				},
+				"colorUseRule": "UseColor_Specified"
+			},
+			"width": 0,
+			"roundingType": "HalfHeightRadius",
+			"bUseBrushTransparency": false
+		},
+		"resourceObject": "None",
+		"resourceName": "None",
+		"uVRegion":
+		{
+			"min":
+			{
+				"x": 0,
+				"y": 0
+			},
+			"max":
+			{
+				"x": 0,
+				"y": 0
+			},
+			"bIsValid": false
+		}
+	},
+	"pieSplitAngle": 10,
+	"font":
+	{
+		"fontObject": "/Script/Engine.Font'/Engine/EngineFonts/Roboto.Roboto'",
+		"fontMaterial": "None",
+		"outlineSettings":
+		{
+			"outlineSize": 0,
+			"bMiteredCorners": false,
+			"bSeparateFillAlpha": false,
+			"bApplyOutlineToDropShadows": false,
+			"outlineMaterial": "None",
+			"outlineColor":
+			{
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 1
+			}
+		},
+		"typefaceFontName": "Regular",
+		"size": 24,
+		"letterSpacing": 0,
+		"skewAmount": 0,
+		"bForceMonospaced": false,
+		"monospacedWidth": 1
+	},
+	"centerOffset":
+	{
+		"x": 0,
+		"y": 0
+	},
+	"lineLength": 41.897876739501953,
+	"textOffset": 45.606796264648438,
+	"lineThickness": 1
+}

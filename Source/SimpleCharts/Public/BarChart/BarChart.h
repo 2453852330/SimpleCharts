@@ -3,6 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "Common/SimpleChartBase.h"
+
 #include "Components/Widget.h"
 
 #include "Types/BarChartType.h"
@@ -14,7 +17,7 @@ class SBarChart;
  * 
  */
 UCLASS()
-class SIMPLECHARTS_API UBarChart : public UWidget
+class SIMPLECHARTS_API UBarChart : public USimpleChartBase
 {
 	GENERATED_BODY()
 public:
@@ -27,7 +30,11 @@ public:
 #endif
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="BarChart")
-	FBarChartSettings BarChartSettings; 
+	FBarChartSettings BarChartSettings;
+
+	virtual FString BP_SetPathLineSettingsFromJson(FString JsonFilePath) override;
+	virtual void BP_ExportPathLineSettingsToJson(FString JsonFilePath) override;
+
 protected:
 	virtual TSharedRef<SWidget> RebuildWidget() override;
 	TSharedPtr<SBarChart> BarChart = nullptr;
