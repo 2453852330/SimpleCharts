@@ -37,4 +37,6 @@ struct FPieChartSettings
 	float TextOffset = 50;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float LineThickness = 1;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float RotateAngle;
 };

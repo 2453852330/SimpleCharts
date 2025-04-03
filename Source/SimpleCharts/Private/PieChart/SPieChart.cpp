@@ -25,7 +25,7 @@ int32 SPieChart::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeomet
 		FSlateRenderTransform PieRenderTransform = AllottedGeometry.ToPaintGeometry().GetAccumulatedRenderTransform();
 		FVector2D LocalSize = AllottedGeometry.GetLocalSize();
 
-		float sumAngle = 0;
+		float sumAngle = PieChartSettings.RotateAngle;
 		
 		for (int32 i = 0; i < PieChartSettings.PieChartDatas.Num(); ++i)
 		{
