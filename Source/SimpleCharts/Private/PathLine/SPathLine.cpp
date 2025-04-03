@@ -4,7 +4,10 @@
 #include "PathLine/SPathLine.h"
 #include "SlateOptMacros.h"
 
+#include "Fonts/FontMeasure.h"
+
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
+
 void SPathLine::Construct(const FArguments& InArgs)
 {
 	PathLineSettings = InArgs._PathLineSettings;
@@ -18,50 +21,89 @@ FVector2D SPathLine::ComputeDesiredSize(float) const
 int32 SPathLine::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId,
 	const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const
 {
+	
 	FVector2D LocalSize = AllottedGeometry.GetLocalSize();
-	float Scale = 0.8;
-	// offset
-	FVector2D Offset = LocalSize * 0.1; Offset.Y *= -1;
-	
-	// draw axis
-	FSlateDrawElement::MakeLines(OutDrawElements,LayerId,AllottedGeometry.ToPaintGeometry(FSlateLayoutTransform(Scale)),
-		{GetConvertPos(FVector2D(-Offset.X,0)+Offset),GetConvertPos(FVector2D(LocalSize.X,0)+Offset)},ESlateDrawEffect::None,PathLineSettings.XAxisColor,true,PathLineSettings.LineThickness);
-	FSlateDrawElement::MakeLines(OutDrawElements,LayerId,AllottedGeometry.ToPaintGeometry(FSlateLayoutTransform(Scale)),
-		{GetConvertPos(FVector2D(0,Offset.Y)+Offset),GetConvertPos(FVector2D(0,LocalSize.Y)+Offset)},ESlateDrawEffect::None,PathLineSettings.YAxisColor,true,PathLineSettings.LineThickness);
-
-	// calc maxX & maxY
+	// 获取X-Y坐标轴的最大值,用于统一缩放
 	FVector2D MaxXY = GetMaxXY();
+	// font
+	TSharedRef<FSlateFontMeasure> fontMeasure = FSlateApplication::Get().GetRenderer()->GetFontMeasureService();
+
 	
-	// draw line
-	if (PathLineSettings.LineDatas.Num())
+	// draw X Axis
+	TArray<FVector2D> Points;
+	float x_length = LocalSize.X * PathLineSettings.AxisScale;
+	Points.Add(GetConvertPos(FVector2D(0.0f, 0.0f) + PathLineSettings.AxisOffset));
+	Points.Add(GetConvertPos(FVector2D(x_length, 0.0f) + PathLineSettings.AxisOffset));
+	FSlateDrawElement::MakeLines(OutDrawElements,LayerId,AllottedGeometry.ToPaintGeometry(),Points,ESlateDrawEffect::None,PathLineSettings.XAxisColor,true,PathLineSettings.AxisLineThickness);
+	FVector2D text_size_a =  fontMeasure->Measure(PathLineSettings.XAxisTitle,PathLineSettings.Font,1);
+
+	FVector2D text_offset_a = Points[1];
+	text_offset_a.X += LocalSize.X * 0.05;
+	text_offset_a.Y -= text_size_a.Y / 2;
+	FSlateDrawElement::MakeText(OutDrawElements,LayerId,AllottedGeometry.ToOffsetPaintGeometry(text_offset_a + PathLineSettings.XAxisTitleOffset * LocalSize),PathLineSettings.XAxisTitle,PathLineSettings.Font,ESlateDrawEffect::None,PathLineSettings.XAxisColor);
+
+	// draw Y Axis
+	float y_length = LocalSize.Y * PathLineSettings.AxisScale;
+	Points[1] = GetConvertPos(FVector2D(0, y_length) + PathLineSettings.AxisOffset);
+	FSlateDrawElement::MakeLines(OutDrawElements,LayerId,AllottedGeometry.ToPaintGeometry(),Points,ESlateDrawEffect::None,PathLineSettings.YAxisColor,true,PathLineSettings.AxisLineThickness);
+
+	FVector2D text_size_b =  fontMeasure->Measure(PathLineSettings.YAxisTitle,PathLineSettings.Font,1);
+	FVector2D text_offset_b = Points[1];
+	text_offset_b.X -= text_size_b.X / 2;
+	text_offset_b.Y -= LocalSize.Y * 0.05 + text_size_b.Y;
+	FSlateDrawElement::MakeText(OutDrawElements,LayerId,AllottedGeometry.ToOffsetPaintGeometry(text_offset_b + PathLineSettings.YAxisTitleOffset * LocalSize),PathLineSettings.YAxisTitle,PathLineSettings.Font,ESlateDrawEffect::None,PathLineSettings.YAxisColor);
+
+	// 没有数据时只绘制坐标轴
+	if (PathLineSettings.LineDatas.Num() <= 0)
 	{
-		for ( const FPathLineData & it : PathLineSettings.LineDatas)
-		{
-			FSlateDrawElement::MakeLines(OutDrawElements,LayerId,AllottedGeometry.ToPaintGeometry(FSlateLayoutTransform(Scale)),
-				ConvertPosArray(it.PathList,MaxXY,Offset),ESlateDrawEffect::None,it.LineColor,true,it.LineWidth);
-
-			FSlateDrawElement::MakeText(OutDrawElements,LayerId,AllottedGeometry.ToOffsetPaintGeometry(GetTitleOffset(it.TitleOffset)),it.LineTitle,PathLineSettings.Font,ESlateDrawEffect::None,it.LineColor);
-
-		}
+		return LayerId;
 	}
 
-	// draw title
-	FSlateDrawElement::MakeText(OutDrawElements,LayerId,AllottedGeometry.ToOffsetPaintGeometry(GetTitleOffset(PathLineSettings.XAxisTitleOffset)),PathLineSettings.XAxisTitle,PathLineSettings.Font,ESlateDrawEffect::None,PathLineSettings.XAxisColor);
-	FSlateDrawElement::MakeText(OutDrawElements,LayerId,AllottedGeometry.ToOffsetPaintGeometry(GetTitleOffset(PathLineSettings.YAxisTitleOffset)),PathLineSettings.YAxisTitle,PathLineSettings.Font,ESlateDrawEffect::None,PathLineSettings.YAxisColor);
+	// 主要是为了获取Y
+	FVector2D text_size = fontMeasure->Measure(PathLineSettings.LineDatas[0].LineTitle,PathLineSettings.Font,1);
 	
+	// draw path
+	for (int32 i = 0; i < PathLineSettings.LineDatas.Num(); ++i)
+	{
+		const FPathLineData & it = PathLineSettings.LineDatas[i];
+		
+		TArray<FVector2D> SortArray = GetSortArray(it.PathList);
+		// 只有一个点或者没有点时跳过
+		if (SortArray.Num() < 2)
+		{
+			continue;
+		}
+		TArray<FVector2D> PathPoints;
+		for (int32 m = 0; m < SortArray.Num(); ++m)
+		{
+			// 计算按比例缩放后的点
+			FVector2D scalePoint =  SortArray[m] / MaxXY * LocalSize;
+			// 将其偏移并缩放到坐标轴中
+			FVector2D offsetPoint = PathLineSettings.AxisOffset +  scalePoint *  PathLineSettings.AxisScale;
+			PathPoints.Add(GetConvertPos(offsetPoint));
+		}
+		FSlateDrawElement::MakeLines(OutDrawElements,LayerId,AllottedGeometry.ToPaintGeometry(),PathPoints,ESlateDrawEffect::None,it.LineColor,true,PathLineSettings.LineThickness);
+
+		// 绘制 Title
+		// 对整体位置进行offset
+		FVector2D text_offset = PathLineSettings.TitleOffset * LocalSize;
+		text_offset.Y -= i * text_size.Y;
+		// 单独进行offset
+		text_offset += it.TitleOffset * LocalSize;
+		FSlateDrawElement::MakeText(OutDrawElements,LayerId,AllottedGeometry.ToOffsetPaintGeometry(GetConvertPos(text_offset)),it.LineTitle,PathLineSettings.Font,ESlateDrawEffect::None,it.LineColor);
+	}
 	
 	return ++LayerId;
 }
 
-TArray<FVector2D> SPathLine::ConvertPosArray(const TArray<FVector2D>& InPosArray,FVector2D MaxXY,FVector2D Offset) const
+
+TArray<FVector2D> SPathLine::GetSortArray(const TArray<FVector2D>& InPosArray) const
 {
-	TArray<FVector2D> Tmp;
-	Tmp.AddZeroed(InPosArray.Num());
-	FVector2D LocalSize = GetCachedGeometry().GetLocalSize();
-	for (int32 i = 0; i < InPosArray.Num(); ++i)
+	TArray<FVector2D> Tmp = InPosArray;
+	Algo::Sort(Tmp,[](FVector2D v1,FVector2D v2) ->bool
 	{
-		Tmp[i] = GetConvertPos(InPosArray[i] / MaxXY * LocalSize + Offset);
-	}
+		return v1.X < v2.X;
+	});
 	return Tmp;
 }
 
@@ -95,12 +137,6 @@ FVector2D SPathLine::GetMaxXY() const
 	return Tmp;
 }
 
-// the input pos in (0-1)
-FVector2D SPathLine::GetTitleOffset(const FVector2D& InPos) const
-{
-	FVector2D LocalSize = GetCachedGeometry().GetLocalSize() * InPos;
-	return GetConvertPos(LocalSize);
-}
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 

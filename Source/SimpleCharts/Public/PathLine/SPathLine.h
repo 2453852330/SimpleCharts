@@ -30,9 +30,8 @@ private:
 	virtual int32 OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId,
 		const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const override;
 
-	TArray<FVector2D> ConvertPosArray(const TArray<FVector2D>& InPosArray,FVector2D MaxXY,FVector2D Offset) const;
+	TArray<FVector2D> GetSortArray(const TArray<FVector2D>& InPosArray) const;
 	FVector2D GetConvertPos(const FVector2D& InPos) const;
 	FVector2D GetMaxXY() const;
-	FVector2D GetTitleOffset(const FVector2D& InPos) const;
 };
 

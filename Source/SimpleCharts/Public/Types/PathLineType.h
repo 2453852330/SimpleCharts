@@ -37,7 +37,15 @@ struct FPathLineSettings
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FLinearColor YAxisColor = FLinearColor::White;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AxisLineThickness = 1.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float LineThickness = 1.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FSlateFontInfo Font;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D AxisOffset;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AxisScale = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta=(ClampMax=1,ClampMin=0))
+	FVector2D TitleOffset;
 };
